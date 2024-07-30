@@ -27,7 +27,7 @@ namespace Axiom.Services.PersonAPI.Controllers
         {
             try
             {
-                var objList = _db.Persons.Include(p => p.PersonDetails).ToList();
+                var objList = _db.Persons.Include(p => p.PersonDetails).Include(p => p.HealthDetails).ToList();
                 _response.Result = _mapper.Map<IEnumerable<PersonDTO>>(objList);
             }
             catch (Exception ex)
@@ -43,7 +43,7 @@ namespace Axiom.Services.PersonAPI.Controllers
         {
             try
             {
-                var obj = _db.Persons.Include(p => p.PersonDetails).FirstOrDefault(u => u.PersonId == id);
+                var obj = _db.Persons.Include(p => p.PersonDetails).Include(p => p.HealthDetails).FirstOrDefault(u => u.PersonId == id);
                 _response.Result = _mapper.Map<PersonDTO>(obj);
             }
             catch (Exception ex)

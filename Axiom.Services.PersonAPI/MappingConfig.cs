@@ -12,6 +12,7 @@ namespace Axiom.Services.PersonAPI
             {
                 config.CreateMap<PersonDTO, Person>().ReverseMap();
                 config.CreateMap<PersonDetailsDTO, PersonDetails>().ReverseMap();
+                config.CreateMap<HealthDetailsDTO, HealthDetails>().ReverseMap();
             });
 
             return MappingConfig;
