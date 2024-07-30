@@ -11,5 +11,6 @@
         public string FullAddress { get; set; }
 
         public PersonDetailsDTO PersonDetails { get; set; }
+        public HealthDetailsDTO HealthDetails { get; set; }
     }
 }
