@@ -9,6 +9,7 @@ namespace Axiom.Services.PersonAPI.Data
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<PersonDetails> PersonDetails { get; set; }
+        public DbSet<HealthDetails> HealthDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +20,12 @@ namespace Axiom.Services.PersonAPI.Data
                 .HasOne(p => p.PersonDetails)
                 .WithOne(pd => pd.Person)
                 .HasForeignKey<PersonDetails>(pd => pd.PersonId);
+
+            // Configuração da relação 1:1 entre Person e HealthDetails
+            modelBuilder.Entity<Person>()
+            .HasOne(p => p.HealthDetails)
+            .WithOne(pd => pd.Person)
+            .HasForeignKey<HealthDetails>(pd => pd.PersonId);
         }
 
     }

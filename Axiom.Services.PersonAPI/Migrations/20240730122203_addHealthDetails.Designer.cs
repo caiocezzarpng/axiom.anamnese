@@ -4,6 +4,7 @@ using Axiom.Services.PersonAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Axiom.Services.PersonAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240730122203_addHealthDetails")]
+    partial class addHealthDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +37,7 @@ namespace Axiom.Services.PersonAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Considerations")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("DoExercises")
                         .HasColumnType("tinyint");
@@ -77,8 +79,7 @@ namespace Axiom.Services.PersonAPI.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("TreatmentDescription")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WeeklyFrequency")
                         .HasColumnType("nvarchar(max)");
