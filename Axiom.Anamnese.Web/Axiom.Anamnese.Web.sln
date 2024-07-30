@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axiom.Anamnese.Web", "Axiom.Anamnese.Web.csproj", "{3A246187-BBDC-465A-80F5-1E4D8B4C5B6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiom.Services.PersonAPI", "..\Axiom.Services.PersonAPI\Axiom.Services.PersonAPI.csproj", "{C92140B9-76CF-4390-8761-3A2A6BC4C285}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axiom.Services.PersonAPI", "..\Axiom.Services.PersonAPI\Axiom.Services.PersonAPI.csproj", "{C92140B9-76CF-4390-8761-3A2A6BC4C285}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{37C36598-18E5-484C-B1A4-0BE2696A6BC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C92140B9-76CF-4390-8761-3A2A6BC4C285} = {37C36598-18E5-484C-B1A4-0BE2696A6BC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C381D936-EB90-4845-83D6-CBF35FE0E553}
