@@ -1,0 +1,6 @@
+@Axiom.Services.AuthAPI_HostAddress = http://localhost:5168
+
+GET {{Axiom.Services.AuthAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
