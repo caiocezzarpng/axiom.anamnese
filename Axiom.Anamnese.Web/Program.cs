@@ -8,11 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddHttpClient<IPersonService, PersonService>();
 
+StaticDetails.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 StaticDetails.PersonAPIBase = builder.Configuration["ServiceUrls:PersonAPI"];
 
 builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 

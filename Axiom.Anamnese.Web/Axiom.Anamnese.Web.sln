@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axiom.Services.PersonAPI", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{37C36598-18E5-484C-B1A4-0BE2696A6BC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axiom.Services.AuthAPI", "..\Axiom.Services.AuthAPI\Axiom.Services.AuthAPI.csproj", "{F2CEA214-A233-49A8-A827-B687B7CE9CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axiom.Services.AuthAPI", "..\Axiom.Services.AuthAPI\Axiom.Services.AuthAPI.csproj", "{F2CEA214-A233-49A8-A827-B687B7CE9CAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{B0A5C6F5-29B7-4DAA-89A0-0B6342C45D11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{3A246187-BBDC-465A-80F5-1E4D8B4C5B6A} = {B0A5C6F5-29B7-4DAA-89A0-0B6342C45D11}
 		{C92140B9-76CF-4390-8761-3A2A6BC4C285} = {37C36598-18E5-484C-B1A4-0BE2696A6BC4}
 		{F2CEA214-A233-49A8-A827-B687B7CE9CAD} = {37C36598-18E5-484C-B1A4-0BE2696A6BC4}
 	EndGlobalSection

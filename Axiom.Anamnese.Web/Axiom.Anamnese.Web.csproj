@@ -8,6 +8,19 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Person\PersonCreate.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Person\PersonCreate.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Person\PersonCreate.cshtml" />
   </ItemGroup>
 
 </Project>

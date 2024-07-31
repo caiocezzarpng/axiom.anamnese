@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Axiom.Anamnese.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
@@ -26,19 +27,8 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Content Management
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" asp-controller="Person" asp-action="PersonIndex">Clientes</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                            </ul>
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="CartIndex">
-                                &nbsp; <i class="bi bi-cart"></i>&nbsp
-                            </a>
+                            <a class="nav-link" asp-controller="Person" asp-action="PersonIndex">Pacientes</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -74,7 +64,7 @@
 
     <footer class="footer text-muted">
         <div class="text-center">
-            Made with <i class="bi bi-balloon-heart-fill"></i> by caiocesar.dev
+            Made with <i class="bi bi-balloon-heart-fill"></i> by axiom.systems
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
