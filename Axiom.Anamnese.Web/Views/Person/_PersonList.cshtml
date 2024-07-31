@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Axiom.Services.PersonAPI.Models.DTOs.PersonDTO>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Occupation</th>
+            <th>Telephone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Ocuppation</td>
+                <td>@item.Telephone</td>
+                <td>
+                    <a class="btn btn-success" asp-action="PersonEdit" asp-route-PersonId="@item.PersonId">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a asp-action="PersonDelete" asp-route-PersonId="@item.PersonId" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

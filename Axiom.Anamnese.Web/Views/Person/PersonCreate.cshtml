@@ -1,0 +1,65 @@
+﻿@model Axiom.Services.PersonAPI.Models.DTOs.PersonDTO
+
+<form asp-action="PersonCreate" enctype="multipart/form-data">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-center">Cadastro de Paciente</h1>
+        <hr />
+        <div class="row">
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">Nome</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">Email</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">Telefone</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Telephone" class="form-control" data-mask="(00) 0000-0000" />
+                <span asp-validation-for="Telephone" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">Data de Nascimento</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="BirthDate" class="form-control" type="date" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">Endereço completo</label>
+            </div>
+            <div class="col-10 pb-3">
+                <textarea asp-for="FullAddress" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="FullAddress" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size:20px;">Ocupação</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Ocuppation" class="form-control" />
+                <span asp-validation-for="Ocuppation" class="text-danger"></span>
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="PersonIndex" class="btn-primary btn form-control ">Voltar</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Create" class="btn btn-success form-control" />
+            </div>
+        </div>
+        <div></div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

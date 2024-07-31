@@ -2,6 +2,7 @@
 using Axiom.Services.PersonAPI.Data;
 using Axiom.Services.PersonAPI.Models;
 using Axiom.Services.PersonAPI.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace Axiom.Services.PersonAPI.Controllers
 {
     [Route("api/person")]
     [ApiController]
+    [Authorize]
     public class PersonAPIController : ControllerBase
     {
         private readonly AppDbContext _db;
@@ -55,6 +57,23 @@ namespace Axiom.Services.PersonAPI.Controllers
             return _response;
         }
 
+        [HttpPost("GetPersonsByName")]
+        public ResponseDTO GetPersonsByName([FromBody] string name)
+        {
+            try
+            {
+                var objList = _db.Persons.Include(p => p.PersonDetails).Include(p => p.HealthDetails).Where(u => u.Name.Contains(name)).ToList();
+                _response.Result = _mapper.Map<IEnumerable<PersonDTO>>(objList);
+            }
+            catch (Exception ex)
+            {
+                _response.Success = false;
+                _response.Message = ex.Message;
+            }
+
+            return _response;
+        }
+
         [HttpPost]
         public ResponseDTO Post([FromBody] PersonDTO personDTO)
         {
@@ -75,24 +94,16 @@ namespace Axiom.Services.PersonAPI.Controllers
             return _response;
         }
 
-        [HttpPut("{id:long}")]
-        public ResponseDTO Put(long id, [FromBody] PersonDTO personDTO)
+        [HttpPut]
+        public ResponseDTO Put([FromBody] PersonDTO personDTO)
         {
             try
             {
-                var objFromDb = _db.Persons.Include(p => p.PersonDetails).FirstOrDefault(u => u.PersonId == id);
-                if (objFromDb != null)
-                {
-                    _mapper.Map(personDTO, objFromDb);
-                    _db.SaveChanges();
+                Person obj = _mapper.Map<Person>(personDTO);
+                _db.Persons.Update(obj);
+                _db.SaveChanges();
 
-                    _response.Result = _mapper.Map<PersonDTO>(objFromDb);
-                }
-                else
-                {
-                    _response.Success = false;
-                    _response.Message = "Person not found.";
-                }
+                _response.Result = _mapper.Map<PersonDTO>(obj);
             }
             catch (Exception ex)
             {
@@ -114,12 +125,12 @@ namespace Axiom.Services.PersonAPI.Controllers
                     _db.Persons.Remove(obj);
                     _db.SaveChanges();
 
-                    _response.Message = "Person has been deleted!";
+                    _response.Message = "Paciente excluido!";
                 }
                 else
                 {
                     _response.Success = false;
-                    _response.Message = "Person not found.";
+                    _response.Message = "Paciente não encontrado";
                 }
             }
             catch (Exception ex)

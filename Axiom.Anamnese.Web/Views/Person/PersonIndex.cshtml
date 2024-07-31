@@ -4,64 +4,40 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h1 class="text-white">Persons</h1>
+                <h1 class="text-white">Pacientes</h1>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
         <div class="row pb-3">
             <div class="col-6">
+                <input type="text" id="searchName" class="form-control" placeholder="Pesquisar por nome.." />
             </div>
             <div class="col-6 text-end">
-                <a asp-action="PersonCreate" class="btn btn-outline-primary"><i class="bi bi-plus-square"></i> Create New Person</a>
+                <a asp-action="PersonCreate" class="btn btn-outline-primary"><i class="bi bi-plus-square"></i> Cadastrar Paciente</a>
             </div>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Occupation
-                    </th>
-                    <th>
-                        Telephone
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Email
-                        </td>
-                        <td>
-                            @item.Ocuppation
-                        </td>
-                        <td>
-                            @item.Telephone
-                        </td>
-                        <td>
-                            <a class="btn btn-success">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <a asp-action="PersonDelete" asp-route-personId="@item.PersonId" class="btn btn-danger">
-                                <i class="bi bi-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
+        <div id="personList">
+            <partial name="_PersonList" model="Model" />
+        </div>
     </div>
-
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchName').on('input', function () {
+                var searchName = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("PersonSearch", "Person")',
+                    type: 'GET',
+                    data: { name: searchName },
+                    success: function (data) {
+                        $('#personList').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+}
