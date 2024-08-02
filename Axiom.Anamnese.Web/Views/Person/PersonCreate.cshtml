@@ -1,10 +1,14 @@
 ﻿@model Axiom.Services.PersonAPI.Models.DTOs.PersonDTO
 
-<form asp-action="PersonCreate" enctype="multipart/form-data">
-    <br />
-    <div class="container border p-3">
-        <h1 class="text-center">Cadastro de Paciente</h1>
-        <hr />
+@{
+    ViewData["Title"] = "Create Person";
+}
+
+<h2>Cadastro de Paciente</h2>
+
+<form id="multiStepForm" asp-action="PersonCreate" method="post">
+    <div class="step">
+        <h3>1 Passo: Informações básicas</h3>
         <div class="row">
             <div class="col-2">
                 <label class="control-label pt-2" style="font-size:20px;">Nome</label>
@@ -24,7 +28,7 @@
                 <label class="control-label pt-2" style="font-size:20px;">Telefone</label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Telephone" class="form-control" data-mask="(00) 0000-0000" />
+                <input asp-for="Telephone" class="form-control" type="tel" data-mask="(00) 0000-0000" />
                 <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
             <div class="col-2">
@@ -49,17 +53,153 @@
                 <span asp-validation-for="Ocuppation" class="text-danger"></span>
             </div>
             <div class="col-5 offset-2">
-                <a asp-action="PersonIndex" class="btn-primary btn form-control ">Voltar</a>
+                <a asp-action="PersonIndex" class="btn-secondary btn form-control ">Voltar</a>
             </div>
             <div class="col-5">
-                <input type="submit" value="Create" class="btn btn-success form-control" />
+                <button type="button" class="btn btn-primary btn form-control" onclick="nextStep()">Próximo</button>
             </div>
         </div>
-        <div></div>
+    </div>
+    <div class="step" style="display:none;">
+        <h3>Step 2: Detalhes</h3>
+        <div class="form-group">
+            <div class="form-group">
+                <label asp-for="PersonDetails.ReceivedProfessionalMassage" class="d-block">Recebeu Massagem profissional?</label>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="PersonDetails.ReceivedProfessionalMassage" value="true" class="form-check-input" id="receivedMassageYes" />
+                        Sim
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input type="radio" asp-for="PersonDetails.ReceivedProfessionalMassage" value="false" class="form-check-input" id="receivedMassageNo" />
+                        Não
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" id="preferredTechniquesGroup" style="display:none;">
+            <label asp-for="PersonDetails.PreferredTechniques"></label>
+            <input asp-for="PersonDetails.PreferredTechniques" class="form-control" />
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label asp-for="PersonDetails.ServiceExpectations"></label>
+                @foreach (var value in Enum.GetValues(typeof(Axiom.Services.PersonAPI.Models.ServiceExpectations)))
+                {
+                    var description = ((Axiom.Services.PersonAPI.Models.ServiceExpectations)value);
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="PersonDetails.ServiceExpectations" value="@value" class="form-check-input" />
+                        <label class="form-check-label">@description</label>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonDetails.PreferredTouchPressure"></label>
+                @foreach (var value in Enum.GetValues(typeof(Axiom.Services.PersonAPI.Models.TouchPressure)))
+                {
+                    var description = ((Axiom.Services.PersonAPI.Models.TouchPressure)value);
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="PersonDetails.PreferredTouchPressure" value="@value" class="form-check-input" />
+                        <label class="form-check-label">@description</label>
+                    </div>
+                }
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary form-control" onclick="prevStep()">Voltar</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary form-control" onclick="nextStep()">Próximo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step" style="display:none;">
+        <h3>Step 3: Health Details</h3>
+        <div class="form-group">
+            <label asp-for="HealthDetails.MedicalTreatment"></label>
+            <input asp-for="HealthDetails.MedicalTreatment" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="HealthDetails.TreatmentDescription"></label>
+            <input asp-for="HealthDetails.TreatmentDescription" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="HealthDetails.TakingContinuousMedication"></label>
+            <input asp-for="HealthDetails.TakingContinuousMedication" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="HealthDetails.MedicationsList"></label>
+            <input asp-for="HealthDetails.MedicationsList" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="HealthDetails.HasAllergies"></label>
+            <input asp-for="HealthDetails.HasAllergies" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="HealthDetails.AllergiesList"></label>
+            <input asp-for="HealthDetails.AllergiesList" class="form-control" />
+        </div>
+        <!-- Adicionar os outros campos de HealthDetails aqui -->
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-secondary form-control" onclick="prevStep()">Voltar</button>
+                </div>
+                <div class="col-6">
+                    <input type="submit" value="Cadastrar" class="btn btn-success form-control btn-success" />
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 
-
 @section Scripts {
+    <script>
+        var currentStep = 0;
+        showStep(currentStep);
+
+        function showStep(step) {
+            var steps = document.getElementsByClassName("step");
+            steps[step].style.display = "block";
+        }
+
+        function nextStep() {
+            var steps = document.getElementsByClassName("step");
+            steps[currentStep].style.display = "none";
+            currentStep++;
+            showStep(currentStep);
+        }
+
+        function prevStep() {
+            var steps = document.getElementsByClassName("step");
+            steps[currentStep].style.display = "none";
+            currentStep--;
+            showStep(currentStep);
+        }
+
+        document.getElementById('receivedMassageYes').addEventListener('change', function () {
+            document.getElementById('preferredTechniquesGroup').style.display = 'block';
+        });
+        document.getElementById('receivedMassageNo').addEventListener('change', function () {
+            document.getElementById('preferredTechniquesGroup').style.display = 'none';
+        });
+
+        // Ensure the correct state on page load
+        window.onload = function () {
+            if (document.getElementById('receivedMassageYes').checked) {
+                document.getElementById('preferredTechniquesGroup').style.display = 'block';
+            } else {
+                document.getElementById('preferredTechniquesGroup').style.display = 'none';
+            }
+        };
+    </script>
+
     <partial name="_ValidationScriptsPartial" />
 }
