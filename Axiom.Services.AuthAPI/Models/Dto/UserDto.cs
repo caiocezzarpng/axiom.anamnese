@@ -1,6 +1,6 @@
-﻿namespace Axiom.Services.AuthAPI.Models.DTO
+﻿namespace Axiom.Services.AuthAPI.Models.Dto
 {
-    public class UserDTO
+    public class UserDto
     {
         public string Id { get; set; }
         public string Email { get; set; }

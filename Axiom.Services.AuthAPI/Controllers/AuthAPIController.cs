@@ -1,4 +1,4 @@
-﻿using Axiom.Services.AuthAPI.Models.DTO;
+﻿using Axiom.Services.AuthAPI.Models.Dto;
 using Axiom.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +9,7 @@ namespace Axiom.Services.AuthAPI.Controllers
     public class AuthAPIController : ControllerBase
     {
         private readonly IAuthService _authService;
-        protected ResponseDTO _responseDTO;
+        protected ResponseDto _responseDTO;
 
         public AuthAPIController(IAuthService authService)
         {
@@ -19,7 +19,7 @@ namespace Axiom.Services.AuthAPI.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO model)
+        public async Task<IActionResult> Register([FromBody] RegistrationRequestDto model)
         {
             var errorMessage = await _authService.Register(model);
             if (!string.IsNullOrEmpty(errorMessage))
@@ -33,7 +33,7 @@ namespace Axiom.Services.AuthAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto model)
         {
             var loginResponse = await _authService.Login(model);
 
@@ -49,17 +49,14 @@ namespace Axiom.Services.AuthAPI.Controllers
         }
 
         [HttpPost("AssignRole")]
-        public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDTO model)
+        public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDto model)
         {
-            var assignRoleSuccesful = await _authService.AssignRole(model.Email, model.Role.ToUpper());
+            var assignRoleSuccessful = await _authService.AssignRole(model.Email, model.Role.ToUpper());
 
-            if (!assignRoleSuccesful)
-            {
-                _responseDTO.Success = false;
-                _responseDTO.Message = "Error encountered";
-                return BadRequest(_responseDTO);
-            }
-            return Ok(_responseDTO);
+            if (assignRoleSuccessful) return Ok(_responseDTO);
+            _responseDTO.Success = false;
+            _responseDTO.Message = "Error encountered";
+            return BadRequest(_responseDTO);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Axiom.Services.AuthAPI.Data;
 using Axiom.Services.AuthAPI.Models;
-using Axiom.Services.AuthAPI.Models.DTO;
+using Axiom.Services.AuthAPI.Models.Dto;
 using Axiom.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Identity;
 
@@ -37,7 +37,7 @@ namespace Axiom.Services.AuthAPI.Service
             return false;
         }
 
-        public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
+        public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDTO)
         {
             var user = _db.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDTO.UserName.ToLower());
 
@@ -45,14 +45,14 @@ namespace Axiom.Services.AuthAPI.Service
 
             if (user == null || isValid == false)
             {
-                return new LoginResponseDTO() { User = null, Token = "" };
+                return new LoginResponseDto() { User = null, Token = "" };
             }
 
             var roles = await _userManager.GetRolesAsync(user);
 
             var token = _jwtTokenGenerator.GenerateToken(user, roles);
 
-            UserDTO userDTO = new()
+            UserDto userDTO = new()
             {
                 Email = user.Email,
                 Id = user.Id,
@@ -60,14 +60,14 @@ namespace Axiom.Services.AuthAPI.Service
                 PhoneNumber = user.PhoneNumber
             };
 
-            return new LoginResponseDTO()
+            return new LoginResponseDto()
             {
                 User = userDTO,
                 Token = token
             };
         }
 
-        public async Task<string> Register(RegistrationRequestDTO registrationRequestDTO)
+        public async Task<string> Register(RegistrationRequestDto registrationRequestDTO)
         {
             ApplicationUser user = new()
             {
@@ -85,7 +85,7 @@ namespace Axiom.Services.AuthAPI.Service
                 {
                     var userToReturn = _db.ApplicationUsers.First(u => u.UserName == registrationRequestDTO.Email);
 
-                    UserDTO userDTO = new()
+                    UserDto userDTO = new()
                     {
                         Email = userToReturn.Email,
                         Id = userToReturn.Id,
