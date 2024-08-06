@@ -1,11 +1,11 @@
-﻿using Axiom.Anamnese.Web.Models.DTOs;
+﻿using Axiom.Anamnese.Web.Models.Dto;
 
 namespace Axiom.Anamnese.Web.Service.IService
 {
     public interface IAuthService
     {
-        Task<ResponseDTO?> LoginAsync(LoginRequestDTO loginRequestDTO);
-        Task<ResponseDTO?> RegisterAsync(RegistrationRequestDTO registrationRequestDTO);
-        Task<ResponseDTO?> AssignRoleAsync(RegistrationRequestDTO registrationRequestDTO);
+        Task<ResponseDto?> LoginAsync(LoginRequestDto loginRequestDTO);
+        Task<ResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequestDTO);
+        Task<ResponseDto?> AssignRoleAsync(RegistrationRequestDto registrationRequestDTO);
     }
 }

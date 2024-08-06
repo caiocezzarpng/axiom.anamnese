@@ -1,6 +1,8 @@
-﻿namespace Axiom.Services.PersonAPI.Models.DTOs
+﻿using Axiom.Anamnese.Web.Models.Enum;
+
+namespace Axiom.Anamnese.Web.Models.Dto
 {
-    public class PersonDetailsDTO
+    public class PersonDetailsDto
     {
         public int PersonId { get; set; }
         public bool ReceivedProfessionalMassage { get; set; }

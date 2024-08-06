@@ -1,8 +1,8 @@
 ﻿using static Axiom.Anamnese.Web.Utils.StaticDetails;
 
-namespace Axiom.Anamnese.Web.Models.DTOs
+namespace Axiom.Anamnese.Web.Models.Dto
 {
-    public class RequestDTO
+    public class RequestDto
     {
         public ApiType ApiType { get; set; } = ApiType.GET;
         public string? Url { get; set; }

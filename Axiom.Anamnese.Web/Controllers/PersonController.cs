@@ -1,6 +1,5 @@
-﻿using Axiom.Anamnese.Web.Models.DTOs;
+﻿using Axiom.Anamnese.Web.Models.Dto;
 using Axiom.Anamnese.Web.Service.IService;
-using Axiom.Services.PersonAPI.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -17,12 +16,12 @@ namespace Axiom.Anamnese.Web.Controllers
 
         public async Task<IActionResult> PersonIndex()
         {
-            List<PersonDTO>? list = new();
-            ResponseDTO? response = await _personService.GetAllPersonsAsync();
+            List<PersonDto>? list = new();
+            ResponseDto? response = await _personService.GetAllPersonsAsync();
 
             if (response != null && response.Success)
             {
-                list = JsonConvert.DeserializeObject<List<PersonDTO>>(Convert.ToString(response.Result));
+                list = JsonConvert.DeserializeObject<List<PersonDto>>(Convert.ToString(response.Result));
             }
             else
             {
@@ -35,8 +34,8 @@ namespace Axiom.Anamnese.Web.Controllers
 
         public async Task<IActionResult> PersonSearch(string name)
         {
-            List<PersonDTO>? list = new();
-            ResponseDTO? response;
+            List<PersonDto>? list = new();
+            ResponseDto? response;
 
             if (string.IsNullOrEmpty(name))
             {
@@ -49,7 +48,7 @@ namespace Axiom.Anamnese.Web.Controllers
 
             if (response != null && response.Success)
             {
-                list = JsonConvert.DeserializeObject<List<PersonDTO>>(Convert.ToString(response.Result));
+                list = JsonConvert.DeserializeObject<List<PersonDto>>(Convert.ToString(response.Result));
             }
             else
             {
@@ -65,11 +64,11 @@ namespace Axiom.Anamnese.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PersonCreate(PersonDTO model)
+        public async Task<IActionResult> PersonCreate(PersonDto model)
         {
             if (ModelState.IsValid)
             {
-                ResponseDTO? response = await _personService.CreatePersonAsync(model);
+                ResponseDto? response = await _personService.CreatePersonAsync(model);
 
                 if (response != null && response.Success)
                 {
@@ -87,11 +86,11 @@ namespace Axiom.Anamnese.Web.Controllers
 
         public async Task<IActionResult> PersonEdit(long personId)
         {
-            ResponseDTO? response = await _personService.GetPersonByIdAsync(personId);
+            ResponseDto? response = await _personService.GetPersonByIdAsync(personId);
 
             if (response != null && response.Success)
             {
-                PersonDTO? person = JsonConvert.DeserializeObject<PersonDTO>(Convert.ToString(response.Result));
+                PersonDto? person = JsonConvert.DeserializeObject<PersonDto>(Convert.ToString(response.Result));
                 return View(person);
             }
             else
@@ -102,9 +101,9 @@ namespace Axiom.Anamnese.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PersonEdit(PersonDTO person)
+        public async Task<IActionResult> PersonEdit(PersonDto person)
         {
-            ResponseDTO? response = await _personService.UpdatePersonAsync(person);
+            ResponseDto? response = await _personService.UpdatePersonAsync(person);
 
             if (response != null && response.Success)
             {
@@ -121,11 +120,11 @@ namespace Axiom.Anamnese.Web.Controllers
 
         public async Task<IActionResult> PersonDelete(long personId)
         {
-            ResponseDTO? response = await _personService.GetPersonByIdAsync(personId);
+            ResponseDto? response = await _personService.GetPersonByIdAsync(personId);
 
             if (response != null && response.Success)
             {
-                PersonDTO? person = JsonConvert.DeserializeObject<PersonDTO>(Convert.ToString(response.Result));
+                PersonDto? person = JsonConvert.DeserializeObject<PersonDto>(Convert.ToString(response.Result));
                 return View(person);
             }
             else
@@ -136,9 +135,9 @@ namespace Axiom.Anamnese.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PersonDelete(PersonDTO person)
+        public async Task<IActionResult> PersonDelete(PersonDto person)
         {
-            ResponseDTO? response = await _personService.DeletePersonAsync(person.PersonId);
+            ResponseDto? response = await _personService.DeletePersonAsync(person.PersonId);
 
             if (response != null && response.Success)
             {

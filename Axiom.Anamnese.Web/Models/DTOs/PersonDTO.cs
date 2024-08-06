@@ -1,6 +1,6 @@
-﻿namespace Axiom.Services.PersonAPI.Models.DTOs
+﻿namespace Axiom.Anamnese.Web.Models.Dto
 {
-    public class PersonDTO
+    public class PersonDto
     {
         public long PersonId { get; set; }
         public string Name { get; set; }
@@ -10,7 +10,9 @@
         public string Email { get; set; }
         public string FullAddress { get; set; }
 
-        public PersonDetailsDTO PersonDetails { get; set; }
-        public HealthDetailsDTO HealthDetails { get; set; }
+        public string? ImageUrl { get; set; } = "https://placehold.co/603x403";
+
+        public PersonDetailsDto PersonDetails { get; set; }
+        public HealthDetailsDto HealthDetails { get; set; }
     }
 }

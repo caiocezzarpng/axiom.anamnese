@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Axiom.Anamnese.Web.Models.DTOs
+namespace Axiom.Anamnese.Web.Models.Dto
 {
-    public class LoginRequestDTO
+    public class LoginRequestDto
     {
         [Required]
         public string UserName { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Axiom.Services.PersonAPI.Models
+namespace Axiom.Anamnese.Web.Models.Enum
 {
     public enum PressureLevel
     {

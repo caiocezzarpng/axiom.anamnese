@@ -1,4 +1,4 @@
-﻿using Axiom.Anamnese.Web.Models.DTOs;
+﻿using Axiom.Anamnese.Web.Models.Dto;
 using Axiom.Anamnese.Web.Service.IService;
 using Axiom.Anamnese.Web.Utils;
 using Microsoft.AspNetCore.Authentication;
@@ -25,19 +25,19 @@ namespace Axiom.Anamnese.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            LoginRequestDTO loginRequestDTO = new();
+            LoginRequestDto loginRequestDTO = new();
             return View(loginRequestDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginRequestDTO obj)
+        public async Task<IActionResult> Login(LoginRequestDto obj)
         {
-            ResponseDTO responseDTO = await _authService.LoginAsync(obj);
+            ResponseDto responseDTO = await _authService.LoginAsync(obj);
 
             if (responseDTO != null && responseDTO.Success)
             {
-                LoginResponseDTO loginResponseDTO =
-                    JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(responseDTO.Result));
+                LoginResponseDto loginResponseDTO =
+                    JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDTO.Result));
 
                 await SignInUser(loginResponseDTO);
 
@@ -67,10 +67,10 @@ namespace Axiom.Anamnese.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegistrationRequestDTO obj)
+        public async Task<IActionResult> Register(RegistrationRequestDto obj)
         {
-            ResponseDTO result = await _authService.RegisterAsync(obj);
-            ResponseDTO assignRole;
+            ResponseDto result = await _authService.RegisterAsync(obj);
+            ResponseDto assignRole;
 
             if (result != null && result.Success)
             {
@@ -109,7 +109,7 @@ namespace Axiom.Anamnese.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private async Task SignInUser(LoginResponseDTO model)
+        private async Task SignInUser(LoginResponseDto model)
         {
             var handler = new JwtSecurityTokenHandler();
 

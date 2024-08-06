@@ -1,6 +1,6 @@
-﻿namespace Axiom.Anamnese.Web.Models.DTOs
+﻿namespace Axiom.Anamnese.Web.Models.Dto
 {
-    public class ResponseDTO
+    public class ResponseDto
     {
         public object? Result { get; set; }
         public bool Success { get; set; } = true;

@@ -1,4 +1,4 @@
-﻿@model Axiom.Services.PersonAPI.Models.DTOs.PersonDTO
+﻿@model Axiom.Anamnese.Web.Models.Dto.PersonDto
 
 @{
     ViewData["Title"] = "Create Person";
@@ -86,9 +86,9 @@
         <div class="form-group">
             <div class="form-group">
                 <label asp-for="PersonDetails.ServiceExpectations"></label>
-                @foreach (var value in Enum.GetValues(typeof(Axiom.Services.PersonAPI.Models.ServiceExpectations)))
+                @foreach (var value in Enum.GetValues(typeof(Axiom.Anamnese.Web.Models.Enum.ServiceExpectations)))
                 {
-                    var description = ((Axiom.Services.PersonAPI.Models.ServiceExpectations)value);
+                    var description = ((Axiom.Anamnese.Web.Models.Enum.ServiceExpectations)value);
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PersonDetails.ServiceExpectations" value="@value" class="form-check-input" />
                         <label class="form-check-label">@description</label>
@@ -97,9 +97,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="PersonDetails.PreferredTouchPressure"></label>
-                @foreach (var value in Enum.GetValues(typeof(Axiom.Services.PersonAPI.Models.TouchPressure)))
+                @foreach (var value in Enum.GetValues(typeof(Axiom.Anamnese.Web.Models.Enum.TouchPressure)))
                 {
-                    var description = ((Axiom.Services.PersonAPI.Models.TouchPressure)value);
+                    var description = ((Axiom.Anamnese.Web.Models.Enum.TouchPressure)value);
                     <div class="form-check form-check-inline">
                         <input type="radio" asp-for="PersonDetails.PreferredTouchPressure" value="@value" class="form-check-input" />
                         <label class="form-check-label">@description</label>

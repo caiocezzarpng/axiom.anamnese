@@ -1,9 +1,9 @@
-﻿using Axiom.Anamnese.Web.Models.DTOs;
+﻿using Axiom.Anamnese.Web.Models.Dto;
 using Axiom.Anamnese.Web.Service.IService;
-using static Axiom.Anamnese.Web.Utils.StaticDetails;
+using Newtonsoft.Json;
 using System.Net;
 using System.Text;
-using Newtonsoft.Json;
+using static Axiom.Anamnese.Web.Utils.StaticDetails;
 
 namespace Axiom.Anamnese.Web.Service
 {
@@ -19,7 +19,7 @@ namespace Axiom.Anamnese.Web.Service
             _tokenProvider = tokenProvider;
         }
 
-        public async Task<ResponseDTO?> SendAsync(RequestDTO requestDTO, bool withBearer = true)
+        public async Task<ResponseDto?> SendAsync(RequestDto requestDTO, bool withBearer = true)
         {
             try
             {
@@ -72,13 +72,13 @@ namespace Axiom.Anamnese.Web.Service
                         return new() { Success = false, Message = "Internal server error" };
                     default:
                         var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                        var apiResponseDTO = JsonConvert.DeserializeObject<ResponseDTO>(apiContent);
+                        var apiResponseDTO = JsonConvert.DeserializeObject<ResponseDto>(apiContent);
                         return apiResponseDTO;
                 }
             }
             catch (Exception ex)
             {
-                var dto = new ResponseDTO
+                var dto = new ResponseDto()
                 {
                     Message = ex.Message.ToString(),
                     Success = false

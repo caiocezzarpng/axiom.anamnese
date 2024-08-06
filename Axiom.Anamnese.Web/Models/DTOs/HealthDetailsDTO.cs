@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Axiom.Anamnese.Web.Models.Enum;
 
-namespace Axiom.Services.PersonAPI.Models.DTOs
+namespace Axiom.Anamnese.Web.Models.Dto
 {
-    public class HealthDetailsDTO
+    public class HealthDetailsDto
     {
         public long PersonId { get; set; }
         public byte MedicalTreatment { get; set; }

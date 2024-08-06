@@ -1,6 +1,6 @@
-﻿namespace Axiom.Anamnese.Web.Models.DTOs
+﻿namespace Axiom.Anamnese.Web.Models.Dto
 {
-    public class UserDTO
+    public class UserDto
     {
         public string Id { get; set; }
         public string Email { get; set; }

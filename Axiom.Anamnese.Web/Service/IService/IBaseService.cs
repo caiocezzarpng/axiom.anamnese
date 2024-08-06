@@ -1,9 +1,9 @@
-﻿using Axiom.Anamnese.Web.Models.DTOs;
+﻿using Axiom.Anamnese.Web.Models.Dto;
 
 namespace Axiom.Anamnese.Web.Service.IService
 {
     public interface IBaseService
     {
-        Task<ResponseDTO?> SendAsync(RequestDTO requestDTO, bool withBearer = true);
+        Task<ResponseDto?> SendAsync(RequestDto requestDTO, bool withBearer = true);
     }
 }

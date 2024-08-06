@@ -1,4 +1,4 @@
-﻿using Axiom.Anamnese.Web.Models.DTOs;
+﻿using Axiom.Anamnese.Web.Models.Dto;
 using Axiom.Anamnese.Web.Service.IService;
 using Axiom.Anamnese.Web.Utils;
 
@@ -13,9 +13,9 @@ namespace Axiom.Anamnese.Web.Service
             _baseService = baseService;
         }
 
-        public async Task<ResponseDTO?> AssignRoleAsync(RegistrationRequestDTO registrationRequestDTO)
+        public async Task<ResponseDto?> AssignRoleAsync(RegistrationRequestDto registrationRequestDTO)
         {
-            return await _baseService.SendAsync(new RequestDTO()
+            return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = StaticDetails.ApiType.POST,
                 Data = registrationRequestDTO,
@@ -23,9 +23,9 @@ namespace Axiom.Anamnese.Web.Service
             }, withBearer: false);
         }
 
-        public async Task<ResponseDTO?> LoginAsync(LoginRequestDTO loginRequestDTO)
+        public async Task<ResponseDto?> LoginAsync(LoginRequestDto loginRequestDTO)
         {
-            return await _baseService.SendAsync(new RequestDTO()
+            return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = StaticDetails.ApiType.POST,
                 Data = loginRequestDTO,
@@ -33,9 +33,9 @@ namespace Axiom.Anamnese.Web.Service
             }, withBearer: false);
         }
 
-        public async Task<ResponseDTO?> RegisterAsync(RegistrationRequestDTO registrationRequestDTO)
+        public async Task<ResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequestDTO)
         {
-            return await _baseService.SendAsync(new RequestDTO()
+            return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = StaticDetails.ApiType.POST,
                 Data = registrationRequestDTO,
