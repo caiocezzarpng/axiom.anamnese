@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Axiom.Services.PersonAPI.Models.DTOs
+﻿namespace Axiom.Services.PersonAPI.Models.Dto
 {
-    public class HealthDetailsDTO
+    public class HealthDetailsDto
     {
         public long PersonId { get; set; }
         public byte MedicalTreatment { get; set; }

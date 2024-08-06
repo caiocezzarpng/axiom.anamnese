@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Axiom.Services.PersonAPI.Models;
-using Axiom.Services.PersonAPI.Models.DTOs;
+using Axiom.Services.PersonAPI.Models.Dto;
 
 namespace Axiom.Services.PersonAPI
 {
@@ -10,9 +10,9 @@ namespace Axiom.Services.PersonAPI
         {
             var MappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<PersonDTO, Person>().ReverseMap();
-                config.CreateMap<PersonDetailsDTO, PersonDetails>().ReverseMap();
-                config.CreateMap<HealthDetailsDTO, HealthDetails>().ReverseMap();
+                config.CreateMap<PersonDto, Person>().ReverseMap();
+                config.CreateMap<PersonDetailsDto, PersonDetails>().ReverseMap();
+                config.CreateMap<HealthDetailsDto, HealthDetails>().ReverseMap();
             });
 
             return MappingConfig;

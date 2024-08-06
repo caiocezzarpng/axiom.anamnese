@@ -1,6 +1,6 @@
-﻿namespace Axiom.Services.PersonAPI.Models.DTOs
+﻿namespace Axiom.Services.PersonAPI.Models.Dto
 {
-    public class ResponseDTO
+    public class ResponseDto
     {
         public object? Result { get; set; }
         public bool Success { get; set; } = true;

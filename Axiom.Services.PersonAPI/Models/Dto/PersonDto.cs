@@ -1,6 +1,6 @@
-﻿namespace Axiom.Services.PersonAPI.Models.DTOs
+﻿namespace Axiom.Services.PersonAPI.Models.Dto
 {
-    public class PersonDTO
+    public class PersonDto
     {
         public long PersonId { get; set; }
         public string Name { get; set; }
@@ -10,7 +10,7 @@
         public string Email { get; set; }
         public string FullAddress { get; set; }
 
-        public PersonDetailsDTO PersonDetails { get; set; }
-        public HealthDetailsDTO HealthDetails { get; set; }
+        public PersonDetailsDto PersonDetails { get; set; }
+        public HealthDetailsDto HealthDetails { get; set; }
     }
 }

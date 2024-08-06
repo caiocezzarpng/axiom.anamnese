@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Axiom.Services.PersonAPI.Data;
 using Axiom.Services.PersonAPI.Models;
-using Axiom.Services.PersonAPI.Models.DTOs;
+using Axiom.Services.PersonAPI.Models.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,23 +14,23 @@ namespace Axiom.Services.PersonAPI.Controllers
     public class PersonAPIController : ControllerBase
     {
         private readonly AppDbContext _db;
-        private ResponseDTO _response;
+        private ResponseDto _response;
         private IMapper _mapper;
 
         public PersonAPIController(AppDbContext db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;
-            _response = new ResponseDTO();
+            _response = new ResponseDto();
         }
 
         [HttpGet]
-        public ResponseDTO Get()
+        public ResponseDto Get()
         {
             try
             {
                 var objList = _db.Persons.Include(p => p.PersonDetails).Include(p => p.HealthDetails).ToList();
-                _response.Result = _mapper.Map<IEnumerable<PersonDTO>>(objList);
+                _response.Result = _mapper.Map<IEnumerable<PersonDto>>(objList);
             }
             catch (Exception ex)
             {
@@ -41,12 +41,12 @@ namespace Axiom.Services.PersonAPI.Controllers
         }
 
         [HttpGet("{id:long}")]
-        public ResponseDTO Get(long id)
+        public ResponseDto Get(long id)
         {
             try
             {
                 var obj = _db.Persons.Include(p => p.PersonDetails).Include(p => p.HealthDetails).FirstOrDefault(u => u.PersonId == id);
-                _response.Result = _mapper.Map<PersonDTO>(obj);
+                _response.Result = _mapper.Map<PersonDto>(obj);
             }
             catch (Exception ex)
             {
@@ -58,12 +58,12 @@ namespace Axiom.Services.PersonAPI.Controllers
         }
 
         [HttpPost("GetPersonsByName")]
-        public ResponseDTO GetPersonsByName([FromBody] string name)
+        public ResponseDto GetPersonsByName([FromBody] string name)
         {
             try
             {
                 var objList = _db.Persons.Include(p => p.PersonDetails).Include(p => p.HealthDetails).Where(u => u.Name.Contains(name)).ToList();
-                _response.Result = _mapper.Map<IEnumerable<PersonDTO>>(objList);
+                _response.Result = _mapper.Map<IEnumerable<PersonDto>>(objList);
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace Axiom.Services.PersonAPI.Controllers
         }
 
         [HttpPost]
-        public ResponseDTO Post([FromBody] PersonDTO personDTO)
+        public ResponseDto Post([FromBody] PersonDto personDTO)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Axiom.Services.PersonAPI.Controllers
                 _db.Persons.Add(person);
                 _db.SaveChanges();
 
-                _response.Result = _mapper.Map<PersonDTO>(person);
+                _response.Result = _mapper.Map<PersonDto>(person);
             }
             catch (Exception ex)
             {
@@ -95,7 +95,7 @@ namespace Axiom.Services.PersonAPI.Controllers
         }
 
         [HttpPut]
-        public ResponseDTO Put([FromBody] PersonDTO personDTO)
+        public ResponseDto Put([FromBody] PersonDto personDTO)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Axiom.Services.PersonAPI.Controllers
                 _db.Persons.Update(obj);
                 _db.SaveChanges();
 
-                _response.Result = _mapper.Map<PersonDTO>(obj);
+                _response.Result = _mapper.Map<PersonDto>(obj);
             }
             catch (Exception ex)
             {
@@ -115,7 +115,7 @@ namespace Axiom.Services.PersonAPI.Controllers
         }
 
         [HttpDelete("{id:long}")]
-        public ResponseDTO Delete(long id)
+        public ResponseDto Delete(long id)
         {
             try
             {

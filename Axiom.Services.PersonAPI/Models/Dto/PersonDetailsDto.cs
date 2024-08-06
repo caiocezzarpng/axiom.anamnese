@@ -1,6 +1,6 @@
-﻿namespace Axiom.Services.PersonAPI.Models.DTOs
+﻿namespace Axiom.Services.PersonAPI.Models.Dto
 {
-    public class PersonDetailsDTO
+    public class PersonDetailsDto
     {
         public int PersonId { get; set; }
         public bool ReceivedProfessionalMassage { get; set; }
